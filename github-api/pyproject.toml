@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "github-api"
+version = "0.1.0"
+description = ""
+authors = ["Konstantin Romanov <konstantin.ro@miro.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pygithub = "^2.2.0"
+requests = "^2.31.0"
+python-dotenv = "^1.0.1"
+tqdm = "^4.66.1"
+atlassian-python-api = "^3.41.9"
+gitpython = "^3.1.41"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
