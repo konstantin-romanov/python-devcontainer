@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 from github import Github
 from github.GithubException import UnknownObjectException
@@ -24,7 +25,7 @@ class SimpleIssue:
         return self._number
 
 
-def write_to_file(file, data, mode='a', dry_run=False, newline=True):
+def write_to_file(file, data: str, mode='a', dry_run=False, newline=True):
     if dry_run:
         logging.info(f'[Dry mode] Would write to {file}: {data}')
     else:
@@ -111,7 +112,7 @@ def main():
                 except UnknownObjectException as e:
                     logger.info('PR number: %s not found', pr_number)
 
-                    write_to_file(pr_not_found_file, pr_number, dry_run=args.dry_run)
+                    write_to_file(pr_not_found_file, str(pr_number), dry_run=args.dry_run)
                     continue
 
                 if pr.commits == 0:
@@ -128,12 +129,12 @@ def main():
                         # append pr number to file
                         write_to_file(broken_prs_file, pr_number, dry_run=args.dry_run)
 
-                write_to_file(last_issue_file, pr_number, dry_run=args.dry_run, newline=False)
+                write_to_file(last_issue_file, str(pr_number), dry_run=args.dry_run, newline=False, mode='w')
 
             except Exception as e:
                 logger.exception('Exception occurred for PR number: %s', pr_number)
 
-                write_to_file(pr_ex_file, pr_number, dry_run=args.dry_run)
+                write_to_file(pr_ex_file, str(pr_number), dry_run=args.dry_run)
 
     logger.info('Done!')
 
